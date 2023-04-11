@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="" id="rainbow" width="1080px">
+    <script>
+        console.log("about to fetch");
+
+        //how to handle promises using .then()
+        fetch('themoreyouknow.jpg').then(res => {
+            console.log(res);
+            return res.blob();
+        }).then(res=>{
+            console.log(res);
+            document.getElementById('rainboow').src = URL.createObjectURL(res);
+        }).catch(err =>{
+            console.log("error!")
+            console.log(err);
+        })
+
+        //how to handle promises async and await ; ie. same task less code
+        async function catchRainbow(){
+            let res = await fetch('themoreyouknow.jpg');
+            res = await res.blob();
+            document.getElementById('rainbow').src = URL.createObjectURL(res);
+        }
+
+        catchRainbow().catch(err =>{
+            console.log("error!")
+            console.log(err);
+        });//calling this will call the async function;
+        // to catch error use the same catch on the function call ; because this function being async returns a promise;
+
+    </script>
+</body>
+</html>
